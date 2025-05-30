@@ -10,6 +10,10 @@ services:
         value: 3.11.0
       - key: DOPPLER_TOKEN
         sync: false
+      - key: DOPPLER_PROJECT
+        value: portfolio-tracker
+      - key: DOPPLER_CONFIG
+        value: prd
     autoDeploy: true
 
 databases:
