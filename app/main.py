@@ -1,8 +1,10 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import Settings, settings
 from app.api.v1.api import api_router
-from app.core.database import init_db
+from app.core.database import init_db, engine, Base
+from sqlalchemy import text
+from datetime import datetime
 
 app = FastAPI(
     title="Portfolio Tracker API",
@@ -32,7 +34,25 @@ app.include_router(api_router, prefix="/api/v1")
 
 @app.on_event("startup")
 async def startup_event():
+    # Create database tables
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+    # Initialize database connections
     await init_db()
+
+@app.get("/health")
+async def health_check():
+    try:
+        # Test database connection
+        async with engine.connect() as conn:
+            await conn.execute(text("SELECT 1"))
+        return {
+            "status": "healthy",
+            "database": "connected",
+            "timestamp": datetime.utcnow().isoformat()
+        }
+    except Exception as e:
+        raise HTTPException(status_code=503, detail=f"Service unhealthy: {str(e)}")
 
 @app.get("/")
 async def root():
