@@ -1,0 +1,57 @@
+setup:
+  project: portfolio-tracker
+  config: dev
+
+# Configuration for different environments
+configs:
+  dev:
+    # Database
+    DATABASE_URL: "postgresql+asyncpg://postgres:postgres@localhost:5432/portfolio"
+    
+    # Security
+    SECRET_KEY: "your-secret-key-here"
+    ALGORITHM: "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: "30"
+    
+    # OpenAI
+    OPENAI_API_KEY: ""
+    
+    # Alpaca API (Stock Market Data)
+    ALPACA_API_KEY: ""
+    ALPACA_SECRET_KEY: ""
+    
+    # Gemini API (Crypto)
+    GEMINI_API_KEY: ""
+    GEMINI_API_SECRET: ""
+
+  prod:
+    # Database
+    DATABASE_URL: "postgresql+asyncpg://neondb_owner:npg_Njm0Jq7kfMsC@ep-tight-sun-a55v90cj-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require"
+    
+    # Security
+    SECRET_KEY: ""  # Will be set in Doppler dashboard
+    ALGORITHM: "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: "30"
+    
+    # OpenAI
+    OPENAI_API_KEY: ""  # Will be set in Doppler dashboard
+    
+    # Alpaca API
+    ALPACA_API_KEY: ""  # Will be set in Doppler dashboard
+    ALPACA_SECRET_KEY: ""  # Will be set in Doppler dashboard
+    
+    # Gemini API
+    GEMINI_API_KEY: ""  # Will be set in Doppler dashboard
+    GEMINI_API_SECRET: ""  # Will be set in Doppler dashboard
+
+# Optional: Configure different environments
+environments:
+  # Development
+  - name: dev
+    project: portfolio-tracker
+    config: dev
+    
+  # Production
+  - name: prod
+    project: portfolio-tracker
+    config: prod 
