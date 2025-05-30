@@ -24,7 +24,7 @@ configs:
     GEMINI_API_KEY: ""
     GEMINI_API_SECRET: ""
 
-  prod:
+  prd:
     # Database
     DATABASE_URL: "postgresql+asyncpg://neondb_owner:npg_Njm0Jq7kfMsC@ep-tight-sun-a55v90cj-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require"
     
@@ -52,6 +52,6 @@ environments:
     config: dev
     
   # Production
-  - name: prod
+  - name: prd
     project: portfolio-tracker
-    config: prod 
+    config: prd 
