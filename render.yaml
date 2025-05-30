@@ -3,7 +3,10 @@ services:
     name: portfolio-tracker
     env: python
     plan: free
-    buildCommand: curl -Ls --tlsv1.2 --proto "=https" --retry 3 https://cli.doppler.com/install.sh | sh && pip install --no-cache-dir -r requirements.txt
+    buildCommand: |
+      curl -Ls --tlsv1.2 --proto "=https" --retry 3 https://cli.doppler.com/install.sh | sh
+      doppler setup --no-interactive
+      pip install --no-cache-dir -r requirements.txt
     startCommand: doppler run -- python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: PYTHON_VERSION

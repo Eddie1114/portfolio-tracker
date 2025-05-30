@@ -17,11 +17,11 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     
     # External APIs
-    OPENAI_API_KEY: str
+    OPENAI_API_KEY: Optional[str] = None
     
     # Alpaca (for stocks/ETFs)
-    ALPACA_API_KEY: str
-    ALPACA_SECRET_KEY: str
+    ALPACA_API_KEY: Optional[str] = None
+    ALPACA_SECRET_KEY: Optional[str] = None
     
     # Gemini (for crypto)
     GEMINI_API_KEY: str
