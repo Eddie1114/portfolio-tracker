@@ -2,15 +2,27 @@ services:
   - type: web
     name: portfolio-tracker
     env: python
+    plan: free
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
       - key: DATABASE_URL
-        fromDatabase:
-          name: portfolio-tracker-db
-          property: connectionString
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: ALPACA_API_KEY
+        sync: false
+      - key: ALPACA_SECRET_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_API_SECRET_KEY
+        sync: false
+    autoDeploy: true
 
 databases:
   - name: portfolio-tracker-db
